@@ -1,0 +1,2 @@
+SDL_savepng
+xclannad-7hb.tar.gz
