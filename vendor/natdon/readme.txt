@@ -1,0 +1,1 @@
+https://github.com/natdon/ONScripter-CN/tree/master/jni/app_xclannad
