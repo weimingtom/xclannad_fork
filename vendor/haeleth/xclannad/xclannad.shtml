@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>H&aelig;le&thorn;es &aacute;wendende - xclannad patches</title>
+<link rel="StyleSheet" href="style.css" type="text/css" media="screen" title="default" />
+</head>
+<body>
+
+<style type="text/css">
+p.ph { margin: 1em }
+</style>
+
+<div id="menu">
+<p class="top"><em>xclannad</em></p>
+<a href="http://www.haeleth.net/">
+<img src="http://www.haeleth.net/img/nlogo.gif" alt="[logo]" title="H&aelig;le&thorn;es &aacute;wendende" style="border: none" />
+</a>
+<p>Site</p>
+<ul>
+<li><a href="http://www.haeleth.net/">Home</a></li>
+<li><a href="http://dev.haeleth.net/">Development</a></li>
+<li><a href="http://www.haeleth.net/links.shtml">Links</a></li>
+</ul>
+<p>Development</p>
+<ul>
+<li><a href="http://dev.haeleth.net/index.shtml">Home</a></li>
+<li><a href="http://svn.haeleth.net/">Subversion</a></li>
+</ul>
+<p>Projects</p>
+<ul>
+<li><a href="http://dev.haeleth.net/onscripter.shtml">ONScripter</a></li>
+<li><a href="http://dev.haeleth.net/rldev.shtml">RLdev</a></li>
+<li><a href="http://dev.haeleth.net/kpac.shtml">Kpac</a></li>
+<li><a href="http://dev.haeleth.net/majiro.shtml">Majiro stuff</a></li>
+<li><a href="http://dev.haeleth.net/xclannad.shtml">xclannad patches</a></li>
+<li><a href="http://dev.haeleth.net/xkanon.shtml">xkanon patches</a></li>
+<li><a href="http://dev.haeleth.net/kurokoge.shtml">Kurokoge</a></li>
+</ul>
+
+</div>
+<div class="content">
+
+<p class="contentheader" id="top">xclannad</p>
+
+<div class="item">
+<p>I'm hacking on Jagarl's <a
+href="http://www.creator.club.ne.jp/~jagarl/xclannad.html">xclannad</a>
+interpreter in my spare time, in the hopes that it can be persuaded to
+run <cite>Kanon Standard Edition</cite>.  This is where the modifications
+I'm currently fiddling with can be found.</p>
+<p><em>The recent release of 0.07 included all my patches so far, so
+currently there's nothing here.</em></p>
+</div>
+
+<!--
+<p>These patches should be applied to the source code for xclannad 0.06;
+if you can't get it from Jagarl's site for some reason, you can also find
+it <a href="xclannad/xclannad-6.tar.bz2">here</a>.</p>
+<p>カノン～standard edition～を動かせる希望をして、勝手に Jagarlさんの<a
+href="http://www.creator.club.ne.jp/~jagarl/xclannad.html">xclannad</a>という
+通訳プログラムをハックしています。私の修正はこのページにあります。
+下のパッチは xclannad 0.06 のソースコードに適用してください。Jagarlさんの
+サイトからダウンロードできない場合は<a href="xclannad/xclannad-6.tar.bz2">ここ</a>にも
+あります。</p>
+</div>
+
+<p class="contentheader" id="top">The patches</p>
+
+<div class="item">
+<p class="ph">Remove CLANNAD patch
+<br         />クラナドのリターンパッチ除去</p>
+<p><a href="xclannad/xc-no_clannad_patch.patch">PATCH</a></p>
+<p>xclannad 0.06 has a hack in it that inserts an <tt>rtl()</tt> call in
+SEEN9040.  This patch removes that and implements the <tt>rtlMenu()</tt>
+function instead.</p>
+<p>xclannad 0.06 の「メニューから return しない問題」の回避法を除去し、
+代わりに「メニューから return する」コマンドを実装するパッチです。
+</div>
+
+<div class="item">
+<p class="ph">Read flags
+<br         />既読フラグ</p>
+<p><a href="xclannad/xc-kidoku.patch">PATCH</a></p>
+<p>From RealLive 1.2.5 onwards, the bytecode representation of read-text flag
+markers changed slightly.  In older versions (and xclannad 0.06), savepoints and
+entrypoints both used the 0x40 prefix; from 1.2.5 onwards (and with this patch),
+entrypoint markers can also use 0x21 instead.</p>
+<p>RealLive 1.2.5 から、既読フラグの 0x40 はセーブポイントだけで使われ、
+エントリーポイントの場合は 0x21 が使われます。</p>
+</div>
+
+<div class="item">
+<p class="ph">Operator precedence (patch version 2)
+<br         />演算子の優先順位</p>
+<p><a href="xclannad/xc-prec.patch">PATCH</a> :: <a href="xclannad/xc-prec-test.tar.bz2">TEST</a></p>
+<p><strong>UPDATED 2005-10-24 (fix Clannad)</strong></p>
+<p>The precedence of binary operators in RealLive differs from that of C;
+this little patch corrects them.</p>
+<p>RealLiveでは、演算子の優先順位は C や C++ などと微妙な違いがあります。
+このささいなパッチは正しい優先順位を実装すると思います。</p>
+</div>
+
+<div class="item">
+<p class="ph">Variable access and string functions
+<br         />変数読み書きと文字列操作</p>
+<p><a href="xclannad/xc-vars.patch">PATCH</a> :: <a href="xclannad/xc-vars-test.tar.bz2">TEST</a></p>
+<p>RealLive memory can be indexed by byte, nibble, and bit, as well as by
+word.  xclannad currently only implements word-level access; this patch
+adds support for the finer levels. It also implents a number of string functions
+(substring extraction and integer display) required for the accompanying test
+program.</p>
+<p>整数変数はワードとしてだけでなく、ビットや２ビット、４ビット、バイトとしても
+アクセスする事ができます。全てのアクセスモード、そしていくつかの文字列操作を
+実装するパッチです。</p>
+</div>
+-->
+<!--<div class="item">                          -- Not working with 0.06 --
+<p class="ph">Save/load commands
+<br         />セーブ･ロード操作訂正</p>
+<p><a href="xclannad/xc-saveload.patch">PATCH</a></p>
+<p>xclannad 0.06 implements only a subset of RealLive's save/load opcodes.
+This patch adds five more and corrects the operation of one of the existing
+ones.</p>
+<p>不実装のセーブ･ロード操作（確認有りのセーブ･ロードするのや、ただメニュー
+を表示するの）を実装します。実装された操作の一つをバッグフィックスもします。</p>
+</div>-->
+
+</div>
+</body>
+</html>

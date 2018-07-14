@@ -1,0 +1,1 @@
+http://kimatten.hp.infoseek.co.jp/

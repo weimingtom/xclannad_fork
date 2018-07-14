@@ -1,4 +1,4 @@
-# xclannad_fork  
+﻿# xclannad_fork  
 My xclannad fork for study  
 
 ## Build  
@@ -7,6 +7,7 @@ My xclannad fork for study
 
 ## Test Data  
 * 040428_VisualArt's_Key_Clannad (RealLive.exe 1.2.3.5)      
+【资源】CLANNAD简体中文版(3.29GB)4月23日下的  
 
 ## Ref  
 * vendor/xclannad-7hb.tar.gz  
