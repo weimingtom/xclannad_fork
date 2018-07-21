@@ -6,7 +6,8 @@ My xclannad fork for study
 * ubuntu : see vendor/xclannad-7hb.tar.gz, **TODO**    
 
 ## Test Data  
-* 040428_VisualArt's_Key_Clannad (RealLive.exe 1.2.3.5)      
+<pre> [040428][VisualArt's][Key][Clannad] </pre>  
+(RealLive.exe 1.2.3.5)  
 【资源】CLANNAD简体中文版(3.29GB)4月23日下的  
 
 * Clannad FV (Full Voice) version not supported  
